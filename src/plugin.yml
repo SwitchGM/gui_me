@@ -1,0 +1,5 @@
+name: GUIMe
+version: 1.0.0
+author: SwitchGM_
+main: me.joe.bundle_me.gui_me.GUIMePlugin
+api-version: 1.13
