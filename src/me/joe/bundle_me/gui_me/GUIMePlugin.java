@@ -1,5 +1,6 @@
 package me.joe.bundle_me.gui_me;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class GUIMePlugin extends JavaPlugin {
