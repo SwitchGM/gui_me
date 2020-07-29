@@ -27,9 +27,7 @@ public class GUIManager {
 
         Inventory inventory = Bukkit.createInventory(null, size);
 
-        System.out.println("probs ends here");
         this.displayElements(inventory, gui.getElements());
-        System.out.println("i was right");
 
         this.openGUIs.put(player, gui);
 
@@ -76,12 +74,7 @@ public class GUIManager {
         int y = rawPosition / 9;
         int x = (rawPosition % 9) + 1;
 
-        System.out.println(y);
-        System.out.println(x);
-
-        Pair<Integer, Integer> pair = new Pair<>(x, y);
-
-        return pair;
+        return new Pair<>(x, y);
     }
 
     public GUI getGUI(Player player) {

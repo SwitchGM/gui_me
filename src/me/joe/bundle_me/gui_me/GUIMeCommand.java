@@ -5,6 +5,7 @@ import me.joe.bundle_me.gui_me.element.Element;
 import me.joe.bundle_me.gui_me.gui.GUI;
 import me.joe.bundle_me.gui_me.gui.GUIManager;
 import me.joe.bundle_me.gui_me.gui.GUIType;
+import me.joe.bundle_me.item_me.items.CustomItem;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,7 +27,8 @@ public class GUIMeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         GUI gui = new GUI(GUIType.MENU, 2);
-        Element element = new Element(new ItemStack(Material.CHEST));
+
+        Element element = new Element(new CustomItem(Material.CACTUS).setName("&7HEre's A NEma").setShiny(true).getItem());
         Button button = new Button(new ItemStack(Material.NETHER_STAR), new ArrayList<>(Arrays.asList("say hi", "say hello", "say beep boop")));
         gui.setElement(4, 0, element);
         gui.setElement(5, 0, button);
