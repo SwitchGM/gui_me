@@ -3,3 +3,7 @@ version: 1.0.0
 author: SwitchGM_
 main: me.joe.bundle_me.gui_me.GUIMePlugin
 api-version: 1.13
+softdepend: [Item_Me]
+commands:
+  guime:
+    description: GUI Me
