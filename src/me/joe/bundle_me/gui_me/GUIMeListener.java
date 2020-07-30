@@ -7,7 +7,6 @@ import me.joe.bundle_me.gui_me.events.GUIOpenEvent;
 import me.joe.bundle_me.gui_me.gui.GUI;
 import me.joe.bundle_me.gui_me.gui.GUIManager;
 import me.joe.bundle_me.gui_me.gui.GUIType;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -37,7 +36,7 @@ public class GUIMeListener implements Listener {
 
         if (event.getElement() instanceof Button) {
             for (String command : ((Button) event.getElement()).getCommands()) {
-                Bukkit.dispatchCommand(event.getPlayer(), command);
+                event.getPlayer().chat("/" + command);
             }
         }
     }

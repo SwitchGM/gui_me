@@ -26,13 +26,9 @@ public class GUIManager {
         int size = gui.getSize() * 9;
 
         Inventory inventory = Bukkit.createInventory(null, size);
-
         this.displayElements(inventory, gui.getElements());
-
         this.openGUIs.put(player, gui);
-
         player.openInventory(inventory);
-
         return inventory;
     }
 
@@ -67,12 +63,12 @@ public class GUIManager {
     }
 
     public int getRawPosition(int x, int y) {
-        return (y * 9) + x - 1;
+        return (y * 9) + x;
     }
 
     public Pair<Integer, Integer> getPosition(int rawPosition) {
         int y = rawPosition / 9;
-        int x = (rawPosition % 9) + 1;
+        int x = rawPosition % 9;
 
         return new Pair<>(x, y);
     }
