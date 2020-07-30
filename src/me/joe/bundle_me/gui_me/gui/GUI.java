@@ -46,6 +46,26 @@ public class GUI {
         this.elements.get(y).put(x, element);
     }
 
+    public void addElement(Element element) {
+        for (int i = 0; i < this.size; i++) {
+            HashMap<Integer, Element> row = this.elements.get(i);
+            if (row != null) {
+                for (int j = 0; j < 9; j++) {
+                    if (row.containsKey(j)) {
+                        continue;
+                    }
+                    row.put(j, element);
+                    return;
+                }
+            } else {
+                HashMap<Integer, Element> newRow = new HashMap<>();
+                newRow.put(0, element);
+                this.elements.put(i, newRow);
+                return;
+            }
+        }
+    }
+
     public Element getElement(int x, int y) {
         HashMap<Integer, Element> row = this.elements.get(y);
         if (row == null) {
