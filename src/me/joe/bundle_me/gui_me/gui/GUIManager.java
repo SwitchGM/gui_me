@@ -6,6 +6,9 @@ import me.joe.bundle_me.gui_me.element.Button;
 import me.joe.bundle_me.gui_me.element.Element;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
 
 import java.util.HashMap;
@@ -34,6 +37,62 @@ public class GUIManager {
 
     public void closeGUI(Player player) {
         this.openGUIs.remove(player);
+    }
+
+    public void inventoryOpened(InventoryOpenEvent event) {
+        Player player = (Player) event.getPlayer();
+
+        if (!this.hasGUIOpen(player)) {
+            return;
+        }
+
+        GUI gui = this.getGUI(player);
+
+        this.openGUIs.put(player, gui);
+    }
+
+    public void inventoryClosed(InventoryCloseEvent event) {
+        Player player = (Player) event.getPlayer();
+
+        if (!this.hasGUIOpen(player)) {
+            return;
+        }
+
+        this.openGUIs.remove(player);
+    }
+
+    public void inventoryClicked(InventoryClickEvent event) {
+        Player player = (Player) event.getView().getPlayer();
+
+        if (!this.hasGUIOpen(player)) {
+            return;
+        }
+
+        if (event.getClickedInventory() == event.getView().getBottomInventory()) {
+            return;
+        }
+
+        GUI gui = this.getGUI(player);
+
+        if (gui.getType() == GUIType.MENU) {
+            event.setCancelled(true);
+        }
+
+        Element element = this.getElementFromSlot(event.getSlot(), gui);
+
+        if (element instanceof Button) {
+            for (String command : ((Button) element).getCommands()) {
+                player.chat("/" + command);
+            }
+        }
+    }
+
+    private Element getElementFromSlot(int slot, GUI gui) {
+        Pair<Integer, Integer> position = this.getPosition(slot);
+        int x = position.getFirst();
+        int y = position.getSecond();
+
+        return gui.getElement(x, y);
     }
 
     public void displayElements(Inventory inventory, HashMap<Integer, HashMap<Integer, Element>> elements) {
@@ -73,11 +132,19 @@ public class GUIManager {
         return new Pair<>(x, y);
     }
 
+    public boolean hasGUIOpen(Player player) {
+        return this.openGUIs.containsKey(player);
+    }
+
     public GUI getGUI(Player player) {
         if (this.openGUIs.containsKey(player)) {
             return this.openGUIs.get(player);
         }
 
         return null;
+    }
+
+    public HashMap<Player, GUI> getGUIS() {
+        return this.openGUIs;
     }
 }

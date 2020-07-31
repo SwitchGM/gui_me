@@ -26,6 +26,10 @@ public class GUIMeCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        if (strings.length == 1) {
+            System.out.println(this.manager.getGUIS().keySet());
+        }
+
         GUI gui = new GUI(GUIType.MENU, 2);
 
         Element element = new Element(new CustomItem(Material.CACTUS).setName("&7HEre's A NEma").setShiny(true).getItem());
