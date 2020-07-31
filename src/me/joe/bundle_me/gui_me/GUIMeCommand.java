@@ -26,8 +26,8 @@ public class GUIMeCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (strings.length == 1) {
-            System.out.println(this.manager.getGUIS().keySet());
+        if (!commandSender.isOp()) {
+            return false;
         }
 
         GUI gui = new GUI(GUIType.MENU, 2);
